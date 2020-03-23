@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { HubConnectionBuilder } from '@microsoft/signalr'
 
 import './styles.scss'
 
-import { CoffeeTabDataType, AppState } from '../../types'
+import { CoffeeTabDataType, AppState, CoffeeDataType } from '../../types'
 import SideNavigation from '../../components/sideNavigation'
 import SummarySection from '../../components/summarySection'
 import OrderSection from '../../components/orderSection'
@@ -93,7 +94,25 @@ const boxCardData = [
 
 export default function Home() {
   const dispatch = useDispatch()
+  const [currentTabId, setSelectedTabId] = useState<number>(200)
+
   useEffect(() => {
+    const hubConnection = new HubConnectionBuilder()
+      .withUrl('https://localhost:5001/realTimeUpdate')
+      .build()
+
+    if (hubConnection) {
+      hubConnection
+        .start()
+        .then(() => console.log('Connection started'))
+        .catch((err: any) =>
+          console.log('Error while establishing connection :(')
+        )
+      hubConnection.on('update', () => {
+        dispatch(getCoffee())
+      })
+    }
+
     dispatch(getCoffee())
     dispatch(getBox())
   }, [dispatch])
@@ -102,6 +121,9 @@ export default function Home() {
     (state: AppState) => state.coffee.coffeeInStock
   )
   const boxData = useSelector((state: AppState) => state.box.boxInStock)
+  const handleTabClick = (tabId: number) => {
+    setSelectedTabId(tabId)
+  }
 
   return (
     <div className="layout-container">
@@ -114,7 +136,12 @@ export default function Home() {
             path="/stock/coffee"
             component={() => (
               <div>
-                <SummarySection coffeeTabData={tabs} coffeeData={coffeeData} />
+                <SummarySection
+                  coffeeTabData={tabs}
+                  coffeeData={coffeeData}
+                  currentTabId={currentTabId}
+                  onTabClick={handleTabClick}
+                />
                 <OrderSection />
               </div>
             )}
@@ -124,7 +151,12 @@ export default function Home() {
             path="/stock/box"
             component={() => (
               <div>
-                <SummarySection boxCardData={boxCardData} boxData={boxData} />
+                <SummarySection
+                  boxCardData={boxCardData}
+                  boxData={boxData}
+                  currentTabId={currentTabId}
+                  onTabClick={handleTabClick}
+                />
                 <OrderSection />
               </div>
             )}

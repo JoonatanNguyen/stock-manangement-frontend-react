@@ -17,6 +17,8 @@ type SummarySectionType = {
   boxCardData?: SummaryCardType[]
   coffeeData?: CoffeeDataType[]
   boxData?: BoxDataType
+  currentTabId: number
+  onTabClick: (tabId: number) => void
 }
 
 const SummarySection = ({
@@ -24,8 +26,13 @@ const SummarySection = ({
   boxCardData,
   coffeeData,
   boxData,
+  currentTabId,
+  onTabClick,
 }: SummarySectionType) => {
   const currentRoute = useLocation()
+  const handleTabClick = (tabId: number) => {
+    onTabClick(tabId)
+  }
 
   return (
     <div className="summary-section">
@@ -36,7 +43,12 @@ const SummarySection = ({
               {coffeeTabData &&
                 coffeeTabData.map(tab => {
                   return (
-                    <TabLink key={tab.tabId} to={tab.tabName}>
+                    <TabLink
+                      key={tab.tabId}
+                      to={tab.tabName}
+                      onClick={() => handleTabClick(tab.tabId)}
+                      default={currentTabId === tab.tabId}
+                    >
                       {tab.tabTitle}
                     </TabLink>
                   )
