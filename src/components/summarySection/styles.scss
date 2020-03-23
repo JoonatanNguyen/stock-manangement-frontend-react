@@ -1,0 +1,33 @@
+.summary-section {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tab-container {
+  width: 100%;
+  .tab-link-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .tab-link {
+    border: unset;
+    cursor: pointer;
+    outline: unset;
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .tab-link-active {
+    border-bottom: 3px solid #0e0e42;
+    transition: 0.3s ease-in-out;
+  }
+
+  .tab-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
