@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tab-container {
@@ -29,5 +30,7 @@
   .tab-content {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 30px;
   }
 }
