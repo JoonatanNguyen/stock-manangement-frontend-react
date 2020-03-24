@@ -8,8 +8,6 @@ export function* getCoffeeInStock() {
   yield takeEvery(GET_COFFEE_REQUEST, function*() {
     try {
       const response = yield call(CoffeeRepository.getCoffee)
-      console.log('coffee saga test')
-      console.log(response.data)
       yield put({
         type: GET_COFFEE,
         payload: {
