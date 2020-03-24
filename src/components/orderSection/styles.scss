@@ -7,8 +7,8 @@
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    position: relative;
   }
-
   td,
   th {
     border: 1px solid #dddddd;
@@ -18,5 +18,26 @@
 
   tr:nth-child(even) {
     background-color: #dddddd;
+  }
+
+  &__comming-soon {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    background-color: #808080b0;
+    display: flex;
+    justify-content: center;
+
+    p {
+      background-color: yellow;
+      text-align: center;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 74px;
+      width: 50%;
+    }
   }
 }
