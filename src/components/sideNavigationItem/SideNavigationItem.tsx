@@ -17,7 +17,7 @@ const SideNavigationItem = ({
       className="navigation-item-container"
       onClick={() => onNavigationItemClick(itemName)}
       style={{
-        backgroundColor: isActive ? 'pink' : '',
+        backgroundColor: isActive ? '#3b3b8c' : '',
       }}
     >
       <p>{itemName}</p>
