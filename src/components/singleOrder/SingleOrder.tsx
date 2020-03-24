@@ -1,13 +1,25 @@
 import React from 'react'
+import { CoffeeOrderItemType } from '../../types'
 
-const SingleOrder = () => {
-  var d = new Date()
+type SingleOrderType = {
+  orderQuantity: CoffeeOrderItemType[]
+  boxAmount: number
+  orderDate: string
+}
+
+const SingleOrder = ({
+  orderQuantity,
+  boxAmount,
+  orderDate,
+}: SingleOrderType) => {
   return (
-    <tr>
-      <td>30</td>
-      <td>40</td>
-      <td>60</td>
-      <td>{d.toLocaleString()}</td>
+    <tr className="order">
+      {orderQuantity &&
+        orderQuantity.map(order => (
+          <td key={order.orderSize}>{order.quantity}</td>
+        ))}
+      <td>{boxAmount}</td>
+      <td>{orderDate}</td>
     </tr>
   )
 }

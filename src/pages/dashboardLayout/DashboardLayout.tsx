@@ -9,7 +9,7 @@ import { CoffeeTabDataType, AppState } from '../../types'
 import SideNavigation from '../../components/sideNavigation'
 import SummarySection from '../../components/summarySection'
 import OrderSection from '../../components/orderSection'
-import { getCoffee, getBox } from '../../redux/actions'
+import { getCoffee, getBox, getOrderList } from '../../redux/actions'
 
 const tabs: CoffeeTabDataType[] = [
   {
@@ -110,16 +110,19 @@ export default function Home() {
         )
       hubConnection.on('update', () => {
         dispatch(getCoffee())
+        dispatch(getBox())
       })
     }
 
     dispatch(getCoffee())
     dispatch(getBox())
+    dispatch(getOrderList())
   }, [dispatch])
 
   const coffeeData = useSelector(
     (state: AppState) => state.coffee.coffeeInStock
   )
+  const orderListData = useSelector((state: AppState) => state.order.orderList)
   const boxData = useSelector((state: AppState) => state.box.boxInStock)
   const handleTabClick = (tabId: number) => {
     setSelectedTabId(tabId)
@@ -142,7 +145,7 @@ export default function Home() {
                   currentTabId={currentTabId}
                   onTabClick={handleTabClick}
                 />
-                <OrderSection />
+                <OrderSection orderListData={orderListData} />
               </div>
             )}
           />
@@ -157,7 +160,7 @@ export default function Home() {
                   currentTabId={currentTabId}
                   onTabClick={handleTabClick}
                 />
-                <OrderSection />
+                <OrderSection orderListData={orderListData} />
               </div>
             )}
           />

@@ -13,6 +13,9 @@ const initState: AppState = {
   box: {
     boxInStock: {} as BoxDataType,
   },
+  order: {
+    orderList: [],
+  },
 }
 
 export default function makeStore(initialState = initState) {

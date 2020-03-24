@@ -6,6 +6,8 @@ export const GET_COFFEE_REQUEST = 'GET_COFFEE_REQUEST'
 export const GET_COFFEE = 'GET_COFFEE'
 export const GET_BOX_REQUEST = 'GET_BOX_REQUEST'
 export const GET_BOX = 'GET_BOX'
+export const GET_ORDER_LIST_REQUEST = 'GET_ORDER_LIST_REQUEST'
+export const GET_ORDER_LIST = 'GET_ORDER_LIST'
 
 // Enum
 export enum DialogType {
@@ -63,10 +65,22 @@ export type GetBoxAction = {
   }
 }
 
+export type GetOrderListRequest = {
+  type: typeof GET_ORDER_LIST_REQUEST
+}
+
+export type GetOrderList = {
+  type: typeof GET_ORDER_LIST
+  payload: {
+    orderList: OrderDataType[]
+  }
+}
+
+export type OrderActions = GetOrderListRequest | GetOrderList
+
 export type BoxActions = GetBoxActionRequest | GetBoxAction
 
 // Use this union in reducer
-export type ProductActions = AddProductAction | RemoveProductAction
 export type CoffeeActions = GetCoffeeActionRequest | GetCoffeeAction
 
 export type CoffeeState = {
@@ -75,6 +89,10 @@ export type CoffeeState = {
 
 export type BoxState = {
   boxInStock: BoxDataType
+}
+
+export type OrderState = {
+  orderList: OrderDataType[]
 }
 
 // Using dynamic keys from an enum
@@ -87,6 +105,7 @@ export type UiState = {
 export type AppState = {
   coffee: CoffeeState
   box: BoxState
+  order: OrderState
 }
 
 export type SummaryCardType = {
@@ -113,4 +132,15 @@ export type BoxDataType = {
   available: number
   reserved: number
   pending: number
+}
+
+export type CoffeeOrderItemType = {
+  orderSize: number
+  quantity: number
+}
+
+export type OrderDataType = {
+  orderedAt: string
+  boxAmount: number
+  orderDetail: CoffeeOrderItemType[]
 }
