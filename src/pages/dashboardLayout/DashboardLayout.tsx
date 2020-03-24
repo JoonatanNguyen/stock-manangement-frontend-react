@@ -5,7 +5,7 @@ import { HubConnectionBuilder } from '@microsoft/signalr'
 
 import './styles.scss'
 
-import { CoffeeTabDataType, AppState, CoffeeDataType } from '../../types'
+import { CoffeeTabDataType, AppState } from '../../types'
 import SideNavigation from '../../components/sideNavigation'
 import SummarySection from '../../components/summarySection'
 import OrderSection from '../../components/orderSection'
@@ -98,7 +98,7 @@ export default function Home() {
 
   useEffect(() => {
     const hubConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:5001/realTimeUpdate')
+      .withUrl('https://slurpstockmanagement.azurewebsites.net/realTimeUpdate')
       .build()
 
     if (hubConnection) {

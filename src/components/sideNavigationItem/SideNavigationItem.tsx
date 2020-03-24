@@ -4,14 +4,22 @@ import './styles.scss'
 
 type SideNavigationItemType = {
   itemName: string
-  onNavigationItemClick: () => void
+  isActive: boolean
+  onNavigationItemClick: (itemName: string) => void
 }
 const SideNavigationItem = ({
   itemName,
   onNavigationItemClick,
+  isActive,
 }: SideNavigationItemType) => {
   return (
-    <div className="navigation-item-container" onClick={onNavigationItemClick}>
+    <div
+      className="navigation-item-container"
+      onClick={() => onNavigationItemClick(itemName)}
+      style={{
+        backgroundColor: isActive ? 'pink' : '',
+      }}
+    >
       <p>{itemName}</p>
     </div>
   )

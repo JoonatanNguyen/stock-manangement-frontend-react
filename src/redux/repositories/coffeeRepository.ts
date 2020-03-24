@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const base = 'https://localhost:5001/api'
+const base = 'https://slurpstockmanagement.azurewebsites.net/api'
 
 export default {
   async getCoffee() {
