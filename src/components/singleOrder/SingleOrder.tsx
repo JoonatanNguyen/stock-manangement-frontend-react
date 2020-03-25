@@ -15,9 +15,9 @@ const SingleOrder = ({
   return (
     <tr className="order">
       {orderQuantity &&
-        orderQuantity.map(order => (
-          <td key={order.orderSize}>{order.quantity}</td>
-        ))}
+        orderQuantity.map((order, index) => {
+          return <td key={order.orderSize}>{order.quantity}</td>
+        })}
       <td>{boxAmount}</td>
       <td>{orderDate}</td>
     </tr>

@@ -42,3 +42,18 @@
     }
   }
 }
+
+#wrapper {
+  border: solid 1px #0f0;
+  display: table;
+}
+#wrapper > div {
+  border: solid 1px #00f;
+  display: table-row;
+}
+#wrapper > div > div {
+  border: solid 1px #f00;
+  display: table-cell;
+  width: 50px;
+  height: 50px;
+}

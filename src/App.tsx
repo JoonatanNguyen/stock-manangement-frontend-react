@@ -9,7 +9,7 @@ export default function App() {
   const history = useHistory()
   useEffect(() => {
     history.push('/stock/coffee')
-  }, [])
+  }, [history])
 
   return (
     <>

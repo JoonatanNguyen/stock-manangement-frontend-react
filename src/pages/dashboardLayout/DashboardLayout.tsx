@@ -111,6 +111,7 @@ export default function Home() {
       hubConnection.on('update', () => {
         dispatch(getCoffee())
         dispatch(getBox())
+        dispatch(getOrderList())
       })
     }
 
