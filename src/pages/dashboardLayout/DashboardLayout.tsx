@@ -6,7 +6,6 @@ import { HubConnectionBuilder } from '@microsoft/signalr'
 import './styles.scss'
 
 import { CoffeeTabDataType, AppState } from '../../types'
-import SideNavigation from '../../components/sideNavigation'
 import SummarySection from '../../components/summarySection'
 import OrderSection from '../../components/orderSection'
 import { getCoffee, getBox, getOrderList } from '../../redux/actions'
@@ -92,7 +91,8 @@ const boxCardData = [
   },
 ]
 
-export default function Home() {
+export default function Home(props: any) {
+  const path = props.match.url
   const dispatch = useDispatch()
   const [currentTabId, setSelectedTabId] = useState<number>(200)
 
@@ -131,28 +131,29 @@ export default function Home() {
 
   return (
     <div className="layout-container">
-      <SideNavigation />
       <div className="layout-content">
         <h1>Dashboard</h1>
         <Switch>
           <Route
-            exact
-            path="/stock/coffee"
-            component={() => (
-              <div>
-                <SummarySection
-                  coffeeTabData={tabs}
-                  coffeeData={coffeeData}
-                  currentTabId={currentTabId}
-                  onTabClick={handleTabClick}
-                />
-                <OrderSection orderListData={orderListData} />
-              </div>
-            )}
+            path={`${path}/coffee`}
+            component={() => {
+              console.log('hello')
+              return (
+                <div>
+                  <SummarySection
+                    coffeeTabData={tabs}
+                    coffeeData={coffeeData}
+                    currentTabId={currentTabId}
+                    onTabClick={handleTabClick}
+                  />
+                  <OrderSection orderListData={orderListData} />
+                </div>
+              )
+            }}
           />
           <Route
             exact
-            path="/stock/box"
+            path={`${path}/box`}
             component={() => (
               <div>
                 <SummarySection
